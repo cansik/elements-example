@@ -20,5 +20,8 @@ set(ELEMENTS_APP_VERSION "1.0")
 
 set(ELEMENTS_APP_RESOURCES)
 
+# COCOA library needed
+find_library(COCOA_LIBRARY Cocoa)
+
 add_executable(elements_example main.cpp)
-target_link_libraries(elements_example PRIVATE cycfi::elements)
+target_link_libraries(elements_example PRIVATE cycfi::elements ${COCOA_LIBRARY})
