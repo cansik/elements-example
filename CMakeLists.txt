@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(elements_example)
+project(elements_example LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -10,7 +10,6 @@ set (CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${ELEMENTS_ROOT}/cmake")
 
 set(ELEMENTS_BUILD_EXAMPLES OFF)
 add_subdirectory(${ELEMENTS_ROOT} elements)
-include(ElementsConfigCommon)
 
 set(ELEMENTS_APP_PROJECT "Elements Example")
 set(ELEMENTS_APP_TITLE "Elements Example")
