@@ -9,9 +9,15 @@ get_filename_component(ELEMENTS_ROOT "${ELEMENTS_ROOT}" ABSOLUTE)
 set (CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${ELEMENTS_ROOT}/cmake")
 
 set(ELEMENTS_BUILD_EXAMPLES OFF)
-add_subdirectory(${ELEMENTS_ROOT} elements)
 
-set(ELEMENTS_APP_PROJECT "Elements Example")
+# If we are building outside the project, you need to set ELEMENTS_ROOT:
+if (NOT ELEMENTS_BUILD_EXAMPLES)
+    include(ElementsConfigCommon)
+    set(ELEMENTS_BUILD_EXAMPLES OFF)
+    add_subdirectory(${ELEMENTS_ROOT} elements)
+endif()
+
+set(ELEMENTS_APP_PROJECT "Elements_Example")
 set(ELEMENTS_APP_TITLE "Elements Example")
 set(ELEMENTS_APP_COPYRIGHT "Copyright (c) 2020 cansik")
 set(ELEMENTS_APP_ID "ch.cansik.example")
@@ -19,8 +25,4 @@ set(ELEMENTS_APP_VERSION "1.0")
 
 set(ELEMENTS_APP_RESOURCES)
 
-# COCOA library needed
-find_library(COCOA_LIBRARY Cocoa)
-
-add_executable(elements_example main.cpp)
-target_link_libraries(elements_example PRIVATE cycfi::elements ${COCOA_LIBRARY})
+include(ElementsConfigApp)
